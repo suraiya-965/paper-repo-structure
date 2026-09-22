@@ -1,0 +1,40 @@
+# Reconstructed from the !pip install commands and imports found across
+# all notebooks in this repo — NOT hand-written by the authors, so please
+# sanity-check before relying on it.
+#
+# Two versions were confirmed from a notebook's own printed output
+# (numpy, pandas); everything else is unpinned because none of the
+# notebooks printed exact versions for these — they just ran on
+# whatever Google Colab had installed at the time (mid-to-late 2026).
+# For a fully reproducible environment, pin these to Colab's package
+# versions as of when the experiments were actually run, or re-run
+# once and freeze with `pip freeze > requirements.lock.txt`.
+
+numpy==2.0.2
+pandas==2.2.2
+
+tensorflow
+scikit-learn
+scipy
+matplotlib
+seaborn
+pillow
+opencv-python-headless
+statsmodels
+split-folders        # import name: splitfolders — used in 00_data_preparation
+
+# Architecture-specific packages (each pinned to --no-deps or -U in the
+# original notebooks — meaning the authors accepted whatever the latest
+# version was at run time, so exact pins aren't recoverable from here)
+tfswin                    # Swin Transformer (Keras 3 native mode)
+tf_keras                  # legacy Keras 2 shim, required alongside...
+keras-cv-attention-models  # ...for LeViT (needs TF_USE_LEGACY_KERAS=1)
+keras-hub                  # ViT-Base
+
+# Environment note: this codebase was run on Google Colab and has a
+# known constraint — tfswin (Keras 3 mode) and keras-cv-attention-models'
+# LeViT (legacy Keras 2 mode, via TF_USE_LEGACY_KERAS=1) cannot be
+# imported in the same Python process. Any ensemble notebook involving
+# both Swin and LeViT works around this with a prediction-cache pattern
+# (see notebooks/02_shared_predictions/ and the Part1/Part2 SigTest
+# notebooks) rather than installing both in one environment.
